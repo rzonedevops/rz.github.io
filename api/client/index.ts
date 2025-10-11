@@ -45,13 +45,13 @@ export class HyperGraphQLClient {
       body: JSON.stringify({ query, variables })
     });
     
-    const result = await response.json();
+    const result = await response.json() as { data?: T; errors?: Array<{ message: string }> };
     
     if (result.errors) {
       throw new Error(result.errors[0].message);
     }
     
-    return result.data;
+    return result.data as T;
   }
   
   /**

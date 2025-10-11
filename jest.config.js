@@ -9,7 +9,11 @@ export default {
     '^.+\\.ts$': [
       'ts-jest',
       {
-        useESM: true
+        useESM: true,
+        tsconfig: {
+          module: 'ES2020',
+          target: 'ES2020'
+        }
       }
     ]
   },
