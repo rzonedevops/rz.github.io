@@ -4,6 +4,8 @@
 
 import { createClient } from '../client/index.js';
 import type { HyperEntity, HyperRelation } from '../types/index.js';
+import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
 
 /**
  * Example 1: Create and query entities
@@ -190,7 +192,13 @@ async function runExamples() {
 }
 
 // Run examples if this file is executed directly
-if (import.meta.url === `file://${process.argv[1]}`) {
+const isDirectExecution =
+  typeof process !== 'undefined' &&
+  Array.isArray(process.argv) &&
+  !!process.argv[1] &&
+  fileURLToPath(import.meta.url) === resolve(process.argv[1]);
+
+if (isDirectExecution) {
   runExamples();
 }
 
